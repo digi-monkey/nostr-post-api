@@ -25,10 +25,17 @@ router.get("/", async (ctx) => {
     console.log("return cache");
     ctx.response.body = JSON.parse(cache);
   } else {
-    const post = await getPost(pubkey, id);
-    const json = JSON.stringify(post);
-    lru.set(url, json);
-    ctx.response.body = json;
+    try {
+      const post = await getPost(pubkey, id);
+      if(post){
+        const json = JSON.stringify(post);
+        lru.set(url, json);
+        ctx.response.body = json;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    return;
   }
 });
 

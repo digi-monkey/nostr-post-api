@@ -37,10 +37,10 @@ export async function getPost(pubkey: string, identifire: string) {
       }
     }
 
-    if(msg.type === "EOSE"){
-	pool.closeSub(subId);
+    if (msg.type === "EOSE") {
+      pool.closeSub(subId);
     }
   }
-  
+
   return event;
 }
