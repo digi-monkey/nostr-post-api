@@ -1,8 +1,7 @@
 import {
   NostrEvent,
-  RelayResponse_REQ_Message,
-} from "https://raw.githubusercontent.com/BlowaterNostr/nostr.ts/main/nostr.ts";
-import { ConnectionPool } from "https://raw.githubusercontent.com/BlowaterNostr/nostr.ts/main/relay.ts";
+} from "https://raw.githubusercontent.com/BlowaterNostr/nostr.ts/4671ee04a8abe16dc6fcedf76d74508863b4b79f/nostr.ts";
+import { ConnectionPool } from "https://raw.githubusercontent.com/BlowaterNostr/nostr.ts/4671ee04a8abe16dc6fcedf76d74508863b4b79f/relay.ts";
 
 const pool = new ConnectionPool();
 /* optional await */ pool.addRelayURLs([
