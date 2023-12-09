@@ -22,6 +22,22 @@ router.get("/", async (ctx) => {
 
   const cache = lru.get(url);
   if (cache) {
+    // try check if event is outdated in async
+    // todo find a more efficiency way
+    try {
+      getPost(pubkey, id).then(post => {
+        if(post){
+          const cacheEvent = JSON.parse(cache);
+          if(post.created_at > cacheEvent.created_at){
+            console.debug('article is outdated! update cache!');
+            lru.set(url, JSON.stringify(post)); 
+          }
+        }
+      })
+    } catch (error) {
+      //ignore error
+    }
+
     console.log("return cache");
     ctx.response.body = JSON.parse(cache);
   } else {
@@ -33,7 +49,7 @@ router.get("/", async (ctx) => {
         ctx.response.body = json;
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
     return;
   }
